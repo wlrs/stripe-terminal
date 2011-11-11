@@ -14,7 +14,7 @@ $currency = 'usd';
 $currency_symbol = '$';
 
 if($_POST){
-	require_once 'lib/Stripe.php';
+	require_once 'stripe-php/lib/Stripe.php';
 
 	$note_parts = array();
 	if($note_prefix) $note_parts[] = $note_prefix;
