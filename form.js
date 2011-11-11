@@ -12,11 +12,13 @@ function clear_error(input){
 function lock_inputs(){
 	$('input').attr('disabled', 'disabled');
 	$('#submit_button').attr('disabled', 'disabled');
+	$('#transaction_error').hide();
 }
 
 function unlock_inputs(){
 	$('input').removeAttr('disabled');
 	$('#submit_button').removeAttr('disabled');
+	$('#progress_message').hide();
 }			
 
 function validate(field, value){
@@ -47,7 +49,8 @@ function validate(field, value){
 }
 
 function sanitize(field){
-	var value = $.trim($('#input_' + field).val());
+	var input = $('#input_' + field);
+	var value = $.trim(input.val());
 
 	if(field == 'number'){
 		value = value.replace(/[^\d]+/g, '');
@@ -69,12 +72,10 @@ function sanitize(field){
 
 	if(field == 'amount'){
 		value = value.replace(/[^\d\.]+/g, '');
-		if(value.length){
-			value = parseFloat(value).toFixed(2);
-		}
+		if(value.length) value = parseFloat(value).toFixed(2);
 	}
 
-	$('#input_' + field).val(value);
+	input.val(value);
 }
 
 
@@ -96,7 +97,7 @@ $(function(){
 	});
 
 	$('#payment_form').submit(function(){
-		$('input').blur(); //fire any cleanup events
+		$('input').blur(); //trigger sanitize/validate functions
 
 		if($('input.error').length > 0){
 			unlock_inputs()
@@ -105,8 +106,6 @@ $(function(){
 		}
 
 		lock_inputs();
-		
-		$('#transaction_error').hide();
 
 		var params = {};
 		params['number'] = $('#input_number').val();
@@ -121,43 +120,42 @@ $(function(){
 		Stripe.createToken(params, amount, function(status, response){				
 			if(response.error){
 				$('#transaction_error').html(response.error.message).slideDown();
-				$('#progress_message').hide();
 				unlock_inputs();
-			}else{
-				var charge = {};
-				charge['token'] = response['id'];
-				charge['amount'] = amount;
-				charge['note'] = $('#input_note').val();
-				$('#progress_message').html('Submitting charge...').show();
-				$.post(location.href, charge, function(response){
-
-					try{
-						response = JSON.parse(response);
-					}catch(err){
-						//first way to fail: server returns something that's not json
-						if(!$.trim(response).length){
-							response = {error: 'Server returned empty response during charge attempt'};
-						}else{
-							response = {error: 'Server returned invalid response:<br /><br />' + response};
-						}
-					}
-					
-					if(response['success']){
-						$('#wrap').html("<h2>MISSION ACCOMPLISHED</h2><b>$" + response['amount'] + " is making its way to our bank account.</b><br />Transaction ID: " + response['id'] + "<br /><br />").css('background-color', '#fff');
-						$("<a href='javascript:void(0);' class='red'>Make another charge.</a>").click(function(){ location.href = location.href; }).appendTo('#wrap');
-					}else{
-						//second way to fail: stripe declined the charge
-						$('#transaction_error').html(response['error']).slideDown();
-						unlock_inputs();
-						$('#progress_message').hide();
-					}
-				}).error(function(response){
-					//third way to fail: server responds with an error code
-					$('#transaction_error').html('Error on charge attempt:<br /><br />' + response.responseText).slideDown();
-					unlock_inputs();
-					$('#progress_message').hide();	
-				});
+				return false;
 			}
+
+			var charge = {};
+			charge['token'] = response['id'];
+			charge['amount'] = amount;
+			charge['note'] = $('#input_note').val();
+			$('#progress_message').html('Submitting charge...').show();
+			$.post(location.href, charge, function(response){
+
+				try{
+					response = JSON.parse(response);
+				}catch(err){
+					//first way to fail: server returns something that's not json
+					if(!$.trim(response).length){
+						response = {error: 'Server returned empty response during charge attempt'};
+					}else{
+						response = {error: 'Server returned invalid response:<br /><br />' + response};
+					}
+				}
+				
+				if(response['success']){
+					$('#wrap').html("<h2>MISSION ACCOMPLISHED</h2><b>$" + response['amount'] + " is making its way to our bank account.</b><br />Transaction ID: " + response['id'] + "<br /><br />").css('background-color', '#fff');
+					$("<a href='javascript:void(0);' class='red'>Make another charge</a>").click(function(){ location.href = location.href; }).appendTo('#wrap');
+				}else{
+					//second way to fail: stripe declined the charge
+					$('#transaction_error').html(response['error']).slideDown();
+					unlock_inputs();
+				}
+			}).error(function(response){
+				//third way to fail: server responds with an error code
+				$('#transaction_error').html('Error on charge attempt:<br /><br />' + response.responseText).slideDown();
+				unlock_inputs();
+			});
+		
 		});
 
 		return false;
