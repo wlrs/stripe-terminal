@@ -34,7 +34,7 @@ body {
   background-image: url('background.gif');
 }
 #wrap {
-  margin: 50px auto;
+  margin: 30px auto;
   width: 365px;
   background-color: rgba(100, 100, 100, 0.1);
   padding: 30px;
@@ -105,6 +105,12 @@ input.error {
   margin: 0 1px 15px 0;
   background-color: #fff;
   border: 2px solid #1c8cff;
+}
+#demo_warning {
+  background-color: rgba(255, 255, 140, 0.6);
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 2px solid #aaa;
 }
 #progress_message {
   margin-top: 13px;

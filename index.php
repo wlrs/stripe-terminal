@@ -1,10 +1,10 @@
 <?
 
 // comment this out to allow http:
-if($_SERVER['SERVER_PORT'] == 80){
-	header("Location: https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
-	die();
-}
+// if($_SERVER['SERVER_PORT'] == 80){
+// 	header("Location: https://" . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI']);
+// 	die();
+// }
 
 $key_publishable = '';
 $key_secret = '';
@@ -12,6 +12,9 @@ $note_prefix = 'Terminal'; //this will be used in the charge's description
 $title = 'Terminal';
 $currency = 'usd';
 $currency_symbol = '$';
+$demo_mode = false;
+
+if(!$key_publishable || !$key_secret) die('Please set stripe API keys');
 
 if($_POST){
 	require_once 'stripe-php/lib/Stripe.php';
@@ -61,6 +64,13 @@ if($_POST){
 	<body>
 		<div id="wrap">
 			<h2><?= $title ?></h2>
+
+			<? if($demo_mode){ ?>
+				<div id="demo_warning">
+					This is a <b>DEMO</b>. Please don't enter real payment info. You can use <b>4242424242424242</b> as a valid card number. <a href="https://stripe.com/docs/testing">Stripe Testing FAQ</a>
+				</div>
+			<? } ?>
+
 			<form action="" method="POST" id="payment_form">
 			    
 				<label>Amount</label>
