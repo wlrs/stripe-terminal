@@ -1,0 +1,158 @@
+//typefaces
+
+.monaco{
+	font-family: Monaco, Courier, Helvetica, Arial, sans-serif;
+}
+
+@blue: #1c8cff;
+
+.hidden{
+	display: none;
+}
+.left{
+	float: left;
+}
+.right{
+	float: right;
+}
+.clear{
+	clear: both;
+}
+
+.align_center{
+	text-align: center;
+}
+.align_right{
+	text-align: right;
+}
+
+.blue{
+	color: @blue;
+}
+
+body{
+	.monaco;
+	background-color: #eee;
+    margin: 0 0 20px 0;
+	font-size: 12px;
+	color: #333;
+	line-height: 16px;
+	font-style: normal;
+	text-decoration: none;
+	background-image: url('background.gif');
+}
+
+#wrap{
+	margin: 50px auto;
+	width: 365px;
+	background-color: rgba(100,100,100, 0.1);
+	padding: 30px;
+	border: 1px solid #ccc;
+	-webkit-border-radius: 25px;
+	-moz-border-radius: 25px;
+	border-radius: 25px;
+}
+
+h2{
+	margin: 0 0 20px 0;
+	padding: 0;
+	.blue;
+}
+
+a, a:visited{
+	.blue;
+	text-decoration: underline;
+}
+
+a:hover{
+	font-weight: bold;
+}
+
+input{	
+	.monaco;
+	font-size: 14px;
+}
+
+label{
+	font-weight: normal !important;
+	display: block;
+	.left;
+	width: 180px;
+	font-size: 14px;
+	padding-top: 8px;
+	font-weight: bold;
+}
+
+.form_input, .form_label{
+	padding-bottom: 10px;
+}
+
+.form_submit{
+	.align_right;
+}
+
+input[type=text], input[type=number], input[type=email]{
+	background-color:#FFFFFF;
+	padding: 5px;
+	margin-bottom: 1px;
+	border: 2px solid #aaa;
+}
+
+.error_wrapper{
+	font-weight: bold;
+	padding: 5px;
+	.blue;
+	display: none;
+	margin: 0 1px 15px 0;
+	background-color: #fff;
+}
+
+input.error{
+	border-color: @blue !important;
+	border: 2px solid @blue!important;
+	margin-bottom: 0;
+}
+
+#submit_button{
+	font-size: 14px;
+	padding: 10px;
+}
+
+#transaction_error{
+	font-weight: bold;
+	padding: 5px;
+	.blue;
+	display: none;
+	margin: 0 1px 15px 0;
+	background-color: #fff;
+	border: 2px solid @blue;
+}
+
+#progress_message{
+	margin-top: 13px;
+	display: none;
+}
+
+#input_amount{
+	width: 120px;
+}
+
+#input_number{
+	width: 160px;
+}
+
+#input_cvc{
+	width: 50px;
+}
+
+#input_exp_month{
+	width: 35px;
+}
+
+#input_exp_year{
+	width: 70px;
+}
+
+#input_note{
+	width: 160px;
+}
