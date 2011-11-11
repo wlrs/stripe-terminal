@@ -36,6 +36,7 @@ body {
 #wrap {
   margin: 30px auto;
   width: 365px;
+  background-color: #ddd;
   background-color: rgba(100, 100, 100, 0.1);
   padding: 30px;
   border: 1px solid #ccc;
@@ -107,6 +108,7 @@ input.error {
   border: 2px solid #1c8cff;
 }
 #demo_warning {
+  background-color: #ffffcc;
   background-color: rgba(255, 255, 140, 0.6);
   padding: 10px;
   margin-bottom: 20px;
