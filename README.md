@@ -21,7 +21,7 @@ Stripe accounts are free but require a US-based checking account to actually cre
 
 Just clone this repo into a clean directory. `stripe-php` is included as a submodule so using the `--recursive` flag will get you everything:
 
-	git clone --recursive git://github.com/wlrs/stripe-terminal.git .
+	git clone --recursive git://github.com/bateller/stripe-terminal.git .
 
 Then just set `$key_publishable` and `$key_secret` in index.php and you're good to go.
 
@@ -30,6 +30,7 @@ Stripe.com provides "test" and "live" API keys, you should start with your test 
 
 ### Demo
 
-[https://wlrs.net/stripe-terminal/demo/](https://wlrs.net/stripe-terminal/demo/)
+No live demo right now.
+# [https://wlrs.net/stripe-terminal/demo/](https://wlrs.net/stripe-terminal/demo/)
 
 The demo is running in test mode, but please don't submit real credit card information.
