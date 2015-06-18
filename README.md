@@ -2,6 +2,9 @@
 
 stripe-terminal is a single form that allows anyone with a [Stripe.com](https://stripe.com/) account to submit credit card charges from any web browser.
 
+This Repository is based on @wlrs' origional Stripe-Terminal repository at [https://github.com/wlrs/stripe-terminal](https://github.com/wlrs/stripe-terminal)
+This is an update to work with Stripe's latest API located at: [https://github.com/stripe/stripe-php](https://github.com/stripe/stripe-php)
+
 ### Features
 
  * Simple javascript validation of data
