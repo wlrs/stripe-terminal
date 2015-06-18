@@ -30,7 +30,6 @@ Stripe.com provides "test" and "live" API keys, you should start with your test 
 
 ### Demo
 
-No live demo right now.
-# [https://wlrs.net/stripe-terminal/demo/](https://wlrs.net/stripe-terminal/demo/)
+[https://wbat.net/stripe-terminal-demo/](https://wbat.net/stripe-terminal-demo/)
 
 The demo is running in test mode, but please don't submit real credit card information.
