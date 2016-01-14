@@ -90,7 +90,7 @@ if($_POST){
                 <label>Card Number</label>
 
                 <div class="form_input">
-                    <input id="input_number" type="text" pattern="[0-9]*"/>
+                    <input id="input_number" type="text" pattern="[0-9]*" maxlength="16" />
                 </div>
                 
                 <div class="clear"></div>
@@ -100,7 +100,7 @@ if($_POST){
                 <label>CVC</label>
 
                 <div class="form_input">
-                    <input id="input_cvc" type="text" pattern="[0-9]*" />
+                    <input id="input_cvc" type="text" pattern="[0-9]*" maxlength="4" />
                 </div>
 
                 <div class="clear"></div>
@@ -110,9 +110,9 @@ if($_POST){
                 <label>Expiration</label>
 
                 <div class="form_input">
-                    <input id="input_exp_month" type="text" pattern="[0-9]*" placeholder="MM" />
+                    <input id="input_exp_month" type="text" pattern="[0-9]*" placeholder="MM" maxlength="2" />
                     <span> / </span>
-                    <input id="input_exp_year" type="text" pattern="[0-9]*" placeholder="YYYY" />
+                    <input id="input_exp_year" type="text" pattern="[0-9]*" placeholder="YYYY" maxlength="4" />
                 </div>
                     
                 <div class="clear"></div>
