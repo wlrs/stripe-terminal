@@ -6,6 +6,15 @@ This Repository is based on [@wlrs](https://github.com/wlrs/stripe-terminal)' or
 
 This is an update to work with Stripe's latest API located at: [https://github.com/stripe/stripe-php](https://github.com/stripe/stripe-php)
 
+### New Version
+A new version has been created. This is a fully revamped update to work with Stripe's latest API located at: [https://github.com/stripe/stripe-php](https://github.com/stripe/stripe-php) as well as Stripe.js (version 3.0)
+
+You can find it here: [https://github.com/bateller/stripe-terminal-new](https://github.com/bateller/stripe-terminal-new)
+
+The new version also no longer requires JQuery
+
+Because the new version is so different, I am keeping this repo separate.
+
 ### Features
 
  * Simple javascript validation of data
