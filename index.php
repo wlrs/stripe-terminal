@@ -17,7 +17,7 @@ $demo_mode          = false;
 if(!$key_publishable || !$key_secret) die('Please set stripe API keys');
 
 if($_POST){
-    require_once 'stripe-php/lib/Stripe.php';
+    require 'stripe-php/init.php';
 
     $note_parts = array();
     if($note_prefix) $note_parts[] = $note_prefix;
@@ -35,15 +35,20 @@ if($_POST){
     );
 
     try{
-        Stripe::setApiKey($key_secret);
-        $charge = Stripe_Charge::create($params);
+        if (!isset($_POST['token'])) {
+                $response['error'] = "The Stripe Token was not generated correctly";
+                $response['success'] = false;
+        } else {
+                \Stripe\Stripe::setApiKey($key_secret);
+                $charge = \Stripe\Charge::create($params);
 
-        $response['success']    = true;
-        $response['id']         = $charge->id;
-        $response['amount']     = number_format($charge->amount / 100, 2);
-        $response['fee']        = number_format($charge->fee / 100, 2);
-        $response['card_type']  = $charge->card->type;
-        $response['card_last4'] = $charge->card->last4;
+                $response['success']    = true;
+                $response['id']         = $charge->id;
+                $response['amount']     = number_format($charge->amount / 100, 2);
+                $response['fee']        = number_format($charge->fee / 100, 2);
+                $response['card_type']  = $charge->card->type;
+                $response['card_last4'] = $charge->card->last4;
+        }
     }catch (Exception $e) {
         $response['error'] = $e->getMessage();
     }
@@ -51,7 +56,6 @@ if($_POST){
     echo json_encode($response);
     die();
 }
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -86,7 +90,7 @@ if($_POST){
                 <label>Card Number</label>
 
                 <div class="form_input">
-                    <input id="input_number" type="text" pattern="[0-9]*"/>
+                    <input id="input_number" type="text" pattern="[0-9]*" maxlength="16" />
                 </div>
                 
                 <div class="clear"></div>
@@ -96,7 +100,7 @@ if($_POST){
                 <label>CVC</label>
 
                 <div class="form_input">
-                    <input id="input_cvc" type="text" pattern="[0-9]*" />
+                    <input id="input_cvc" type="text" pattern="[0-9]*" maxlength="4" />
                 </div>
 
                 <div class="clear"></div>
@@ -106,9 +110,9 @@ if($_POST){
                 <label>Expiration</label>
 
                 <div class="form_input">
-                    <input id="input_exp_month" type="text" pattern="[0-9]*" placeholder="MM" />
+                    <input id="input_exp_month" type="text" pattern="[0-9]*" placeholder="MM" maxlength="2" />
                     <span> / </span>
-                    <input id="input_exp_year" type="text" pattern="[0-9]*" placeholder="YYYY" />
+                    <input id="input_exp_year" type="text" pattern="[0-9]*" placeholder="YYYY" maxlength="4" />
                 </div>
                     
                 <div class="clear"></div>
@@ -137,7 +141,7 @@ if($_POST){
             </form>
         </div>
 
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
         <script type="text/javascript" src="https://js.stripe.com/v1/"></script>
         <script type="text/javascript" src="form.js?<?= filemtime('form.js') ?>"></script>
         <script type="text/javascript">

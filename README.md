@@ -2,6 +2,19 @@
 
 stripe-terminal is a single form that allows anyone with a [Stripe.com](https://stripe.com/) account to submit credit card charges from any web browser.
 
+This Repository is based on [@wlrs](https://github.com/wlrs/stripe-terminal)' original Stripe-Terminal repository at [https://github.com/wlrs/stripe-terminal](https://github.com/wlrs/stripe-terminal)
+
+This is an update to work with Stripe's latest API located at: [https://github.com/stripe/stripe-php](https://github.com/stripe/stripe-php)
+
+### New Version
+A new version has been created. This is a fully revamped update to work with Stripe's latest API located at: [https://github.com/stripe/stripe-php](https://github.com/stripe/stripe-php) as well as Stripe.js (version 3.0)
+
+You can find it here: [https://github.com/bateller/stripe-terminal-new](https://github.com/bateller/stripe-terminal-new)
+
+The new version also no longer requires JQuery
+
+Because the new version is so different, I am keeping this repo separate.
+
 ### Features
 
  * Simple javascript validation of data
@@ -21,7 +34,7 @@ Stripe accounts are free but require a US-based checking account to actually cre
 
 Just clone this repo into a clean directory. `stripe-php` is included as a submodule so using the `--recursive` flag will get you everything:
 
-	git clone --recursive git://github.com/wlrs/stripe-terminal.git .
+	git clone --recursive git://github.com/bateller/stripe-terminal.git .
 
 Then just set `$key_publishable` and `$key_secret` in index.php and you're good to go.
 
@@ -30,6 +43,6 @@ Stripe.com provides "test" and "live" API keys, you should start with your test 
 
 ### Demo
 
-[https://wlrs.net/stripe-terminal/demo/](https://wlrs.net/stripe-terminal/demo/)
+[https://wbat.net/stripe-terminal-demo/](https://wbat.net/stripe-terminal-demo/)
 
 The demo is running in test mode, but please don't submit real credit card information.
